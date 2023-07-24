@@ -1,7 +1,7 @@
 
-const connection = require('../config/database');
-const connection = require('..Utils/otpUtils');
 
+// postController
+const connection = require('../config/database');
 
 // Post Management
 exports.createPost = (req, res) => {
@@ -15,7 +15,7 @@ exports.createPost = (req, res) => {
 
   connection.query('INSERT INTO posts SET ?', post, (err, result) => {
     if (err) throw err;
-    res.send('Post created successfully!');
+    res.render('create-post', { message: 'Post created successfully!' });
   });
 };
 
@@ -53,7 +53,7 @@ exports.updatePost = (req, res) => {
 
   connection.query('UPDATE posts SET title = ?, content = ? WHERE id = ?', [title, content, postId], (err, result) => {
     if (err) throw err;
-    res.send('Post updated successfully!');
+    res.render('edit-post', { post: { id: postId, title, content }, message: 'Post updated successfully!' });
   });
 };
 
@@ -78,7 +78,7 @@ exports.deletePost = (req, res) => {
 
     connection.query('DELETE FROM posts WHERE id = ?', postId, (err, result) => {
       if (err) throw err;
-      res.send('Post deleted successfully!');
+      res.render('index', { message: 'Post deleted successfully!' });
     });
   });
 };

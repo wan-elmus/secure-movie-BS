@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <% if (posts.length === 0) { %>
+        <p>No results found for "<%= searchTerm %>".</p>
+    <% } else { %>
+        <% posts.forEach(post => { %>
+            <h2><%= post.title %></h2>
+            <p><%= post.content %></p>
+            <hr>
+        <% }); %>
+    <% } %>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

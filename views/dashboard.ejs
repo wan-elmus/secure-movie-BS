@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard, <%= user.username %>!</h1>
+    <h2>Your Posts:</h2>
+    <% if (userPosts.length === 0) { %>
+        <p>No posts to display.</p>
+    <% } else { %>
+        <% userPosts.forEach(post => { %>
+            <h3><%= post.title %></h3>
+            <p><%= post.content %></p>
+            <a href="/edit-post/<%= post.id %>">Edit</a>
+            <a href="/delete-post/<%= post.id %>">Delete</a>
+            <hr>
+        <% }); %>
+    <% } %>
+
+    <h2>Search for Posts:</h2>
+    <form action="/search" method="GET">
+        <input type="text" name="term" placeholder="Enter search term">
+        <button type="submit">Search</button>
+    </form>
+
+    <a href="/logout">Logout</a>
+</body>
+</html>
