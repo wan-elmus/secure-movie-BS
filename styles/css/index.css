@@ -1,0 +1,97 @@
+
+/* Common styles for all sections */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  form {
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Additional styles for specific sections */
+  
+  /* Dashboard styles */
+  .dashboard-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+  }
+  
+  .user-greeting {
+    color: white;
+    font-size: 18px;
+    margin: 10px;
+  }
+  
+  .dashboard-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: purple;
+  }
+  
+  /* Search Results styles */
+  #searchResultsContainer {
+    /* Add styles as needed for displaying search results */
+  }
+  
+  /* Edit Post styles */
+  /* Add styles as needed for the Edit Post form */
+  
