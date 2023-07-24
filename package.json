@@ -1,0 +1,15 @@
+{
+  "name": "secure-dev-project",
+  "version": "1.0.0",
+  "description": "To develop a secure movie blog system",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm install mocha chai --save-dev"
+  },
+  "author": "sensei",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
