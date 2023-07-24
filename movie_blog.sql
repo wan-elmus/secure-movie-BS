@@ -22,3 +22,14 @@ CREATE TABLE posts (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- Table to store OTP for users
+CREATE TABLE otp_verification (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    otp VARCHAR(6) NOT NULL,
+    type ENUM('registration', '2fa_enrollment') NOT NULL,
+    expiration_time TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+

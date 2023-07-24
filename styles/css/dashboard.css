@@ -1,0 +1,53 @@
+
+/* Reset default margins and paddings */
+body, h1, p, button {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black; /* Set the background color to black */
+}
+
+h1 {
+    color: white; /* Set the text color to white */
+}
+
+/* Styling for the dashboard container */
+.dashboard-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden; /* Hide scrollbar when the user scrolls */
+}
+
+/* Styling for the user greeting */
+.user-greeting {
+    color: white;
+    font-size: 18px;
+    margin: 10px;
+}
+
+/* Styling for the dashboard buttons */
+.dashboard-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: green; /* Set the background color to green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add a smooth transition effect on hover */
+}
+
+button:hover {
+    background-color: purple; /* Set the background color to purple on hover */
+}
+
