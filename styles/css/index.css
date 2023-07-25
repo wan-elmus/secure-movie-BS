@@ -1,96 +1,174 @@
 
-/* Common styles for all sections */
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set the background color for the entire body */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  form {
-    width: 80%;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  input[type="text"],
-  textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Additional styles for specific sections */
-  
-  /* Dashboard styles */
-  .dashboard-container {
-    width: 100%;
-    height: 100vh;
-    overflow-y: hidden;
-  }
-  
-  .user-greeting {
-    color: white;
-    font-size: 18px;
-    margin: 10px;
-  }
-  
-  .dashboard-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: purple;
-  }
-  
-  /* Search Results styles */
-  #searchResultsContainer {
-    /* Add styles as needed for displaying search results */
-  }
-  
-  /* Edit Post styles */
-  /* Add styles as needed for the Edit Post form */
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Navbar styles */
+nav {
+  background-color: #333;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Dashboard styles */
+#dashboard {
+  padding: 20px;
+}
+
+.dashboard h1 {
+  color: #007bff;
+  font-size: 32px;
+}
+
+.dashboard p {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.dashboard-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dashboard-buttons button:hover {
+  background-color: purple;
+}
+
+/* Create Post styles */
+#create-post {
+  padding: 20px;
+}
+
+#create-post h1 {
+  color: #007bff;
+  font-size: 28px;
+}
+
+#createPostForm label {
+  font-weight: bold;
+}
+
+#createPostForm input[type="text"],
+#createPostForm textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#createPostForm button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#createPostForm button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Search Results styles */
+#search-results {
+  padding: 20px;
+}
+
+#search-results h1 {
+  color: #007bff;
+  font-size: 28px;
+}
+
+#searchResultsContainer {
+  /* Add styles as needed for displaying search results */
+}
+
+/* Edit Post styles */
+#edit-post {
+  padding: 20px;
+}
+
+#edit-post h1 {
+  color: #007bff;
+  font-size: 28px;
+}
+
+#editPostForm label {
+  font-weight: bold;
+}
+
+#editPostForm input[type="text"],
+#editPostForm textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#editPostForm button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#editPostForm button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Footer styles */
+footer {
+  background-color: #222;
+  padding: 10px;
+  text-align: center;
+}
+
+footer p {
+  color: #aaa;
+  font-size: 14px;
+}

@@ -13,13 +13,6 @@ app.set('view engine', 'ejs');
  // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 
-// // Example usage of res.render() in a route handler
-// app.get('/dashboard', (req, res) => {
-//   const user = req.session.user;
-//   res.render('index', { user }); // Pass the user data to the 'index.ejs' view for dynamic rendering
-// });
-
-
 // Set up session middleware
 app.use(
   session({
@@ -39,6 +32,10 @@ app.post('*', csrfProtection);
 // Set up body-parser middleware to parse incoming request bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
 
 
 // Routes for user authentication and 2FA
