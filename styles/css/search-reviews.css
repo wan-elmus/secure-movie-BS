@@ -1,0 +1,98 @@
+
+
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set the background color for the entire body */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Center the layout */
+.search-reviews-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+}
+
+/* Style the header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.site-name {
+  color: #fff;
+  font-size: 30px;
+}
+
+/* Style the main content area */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Style the search results section */
+.search-results {
+  margin-bottom: 30px;
+}
+
+.search-results h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style each search result */
+.search-result {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.search-result h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Style the movie reviews section */
+.movie-reviews {
+  margin-bottom: 30px;
+}
+
+.movie-reviews h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style each movie review */
+.movie-review {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.movie-review h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Style the footer */
+footer {
+  text-align: center;
+  padding: 10px;
+}
+
+footer p {
+  color: #aaa;
+  font-size: 14px;
+}

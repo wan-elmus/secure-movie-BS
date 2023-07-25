@@ -1,0 +1,88 @@
+
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set the background color for the entire body */
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Center the layout */
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Style the header */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.site-name {
+  color: #fff;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+/* Style the main content area */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
+section {
+  flex-basis: 30%;
+  margin-bottom: 20px;
+}
+
+section h3 {
+  color: #007bff;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+section form {
+  display: flex;
+  flex-direction: column;
+}
+
+section label {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+section input[type="text"],
+section textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+section button[type="submit"] {
+  background-color: #4CAF50; /* Green */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease 0s;
+}
+
+section button[type="submit"]:hover {
+  background-color: #45a049;
+}

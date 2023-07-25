@@ -1,9 +1,15 @@
 
-/* dashboard.css */
 /* Reset some default styles */
 body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
+    
+}
+
+@media(max-width: 1024px) {
+    body {
+        flex-direction:column;
+    }
 }
 
 /* Set the background color for the entire body */
@@ -25,8 +31,11 @@ body {
 
 /* Style the logo */
 .logo img {
-    width: 30px;
-    height: 30px;
+    margin: 0;
+    border-radius: 50%;
+    margin-inline: 3rem;
+    width: 80px;
+    height: 80px;
 }
 
 /* Style the menu items */
@@ -37,12 +46,17 @@ body {
 
 .menu li {
     margin-right: 20px;
+    display: inline-block;
 }
 
-.menu a {
+.menu li a {
     color: #fff;
     text-decoration: none;
     font-size: 16px;
+    transition: all 0.5s ease 0s;
+}
+.menu li a:hover {
+    color: blueviolet;
 }
 
 /* Style the login and signup buttons */
@@ -121,7 +135,7 @@ footer p {
 }
 
 /* Style the dashboard buttons */
-.dashboard-container button {
+.dashboard-content button {
     background-color: #4CAF50; /* Green */
     color: #fff;
     border: none;
@@ -130,11 +144,16 @@ footer p {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: all 0.3s ease 0s;
 }
 
 /* Style the selected dashboard button */
-.dashboard-container button.selected {
+.dashboard-content button.selected {
     background-color: #800080; /* Purple */
+}
+
+.dashboard-buttons button:hover {
+    background-color: purple;
 }
 
 /* Prevent the dashboard from hiding when scrolling */
@@ -183,6 +202,7 @@ footer p {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: all 0.3s ease 0s;
 }
 
 .dashboard-content .search-results {
@@ -206,4 +226,10 @@ footer p {
 
 .dashboard-content .search-result p {
     font-size: 16px;
+}
+
+@media(max-width: 1024px) {
+    .dashboard-container {
+        flex-direction:column;
+    }
 }

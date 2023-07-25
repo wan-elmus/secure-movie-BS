@@ -1,80 +1,97 @@
 
 const express = require('express');
 const app = express();
+const path = require('path');
 const session = require('express-session');
 const sessionMiddleware = require('./middleware/sessionMiddleware');
-const { csrfProtection } = require('./middleware/authenticationMiddleware'); // Import the CSRF protection middleware
+const { csrfProtection } = require('./middleware/authenticationMiddleware');
 const authController = require('./controllers/authController');
 const postController = require('./controllers/postController');
 const emailUtils = require('./utils/emailUtils');
+const bcrypt = require('bcrypt'); // Import the bcrypt library
 
- // Configure Express to use EJS as the view engine
-app.set('view engine', 'ejs');
- // Set the views directory
+app.set('view engine', 'html');
 app.set('views', path.join(__dirname, 'views'));
 
-// Set up session middleware
 app.use(
   session({
     secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }, // Set secure to true if using HTTPS
+    cookie: { secure: false },
   })
 );
 
-// Use the session middleware
 app.use(sessionMiddleware);
 
-// Use the CSRF protection middleware for all POST requests
-app.post('*', csrfProtection);
+app.post('/enable-2fa', csrfProtection);
+app.post('/verify-otp-registration', csrfProtection);
+app.post('/verify-otp-2fa-enrollment', csrfProtection);
+app.post('/create-post', csrfProtection);
+app.post('/update-post/:postId', csrfProtection);
 
-// Set up body-parser middleware to parse incoming request bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve static files from the "public" directory
 app.use(express.static('public'));
 
+// Hash and salt the user password before storing it in the database
+app.post('/register', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+    // Save the username, email, and hashedPassword in the database
+    // ... (Your database interaction code here)
 
-// Routes for user authentication and 2FA
-app.post('/register', authController.register);
-app.post('/enable-2fa', authController.enable2FA);
-app.post('/verify-otp-registration', authController.verifyOTPRegistration);
-app.post('/verify-otp-2fa-enrollment', authController.verifyOTP2FAEnrollment);
-app.post('/login', authController.login);
-app.get('/logout', authController.logout);
+    // Redirect to the login page or homepage after successful registration
+    res.redirect('/login');
+  } catch (error) {
+    console.error('Error during registration:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-// Routes for post management
-app.post('/create-post', postController.createPost);
-app.get('/edit-post/:postId', postController.editPost);
-app.post('/update-post/:postId', postController.updatePost);
-app.get('/delete-post/:postId', postController.deletePost);
+// Compare the hashed and salted password during login
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-// Route for searching posts
-app.get('/search', postController.searchPosts);
+    // Retrieve the hashed password from the database based on the provided username
+    // ... (Your database interaction code here)
 
-// Send email example route
-app.get('/send-email', (req, res) => {
-  const emailOptions = {
-    from: 'your-email', // Replace with your email address
-    to: 'recipient-email', // Replace with the recipient's email address
-    subject: 'Email Subject',
-    text: 'Email Content',
-  };
+    // Compare the hashed password with the user-provided password
+    const passwordMatch = await bcrypt.compare(password, hashedPasswordFromDatabase);
 
- 
-
-  emailUtils.sendEmail(emailOptions, (error, info) => {
-    if (error) {s
-      console.log('Error sending email:', error);
-      res.status(500).send('Error sending email');
+    if (passwordMatch) {
+      // Passwords match, user is authenticated
+      // Set up the user session and redirect to the dashboard or homepage
+      req.session.isAuthenticated = true;
+      // ... (Other session data you want to store)
+      res.redirect('/dashboard');
     } else {
-      console.log('Email sent:', info.response);
-      res.send('Email sent successfully!');
+      // Passwords do not match, login failed
+      res.status(401).send('Invalid credentials');
     }
-  });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Rest of the routes and server setup remains the same
+// ...
+
+// Error handling middleware for 404 Not Found
+app.use((req, res, next) => {
+  res.status(404).send('Page not found');
+});
+
+// Error handling middleware for 500 Internal Server Error
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Internal Server Error');
 });
 
 // Start the server
@@ -82,3 +99,4 @@ const port = 3000;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+

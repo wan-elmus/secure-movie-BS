@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tags and other head elements -->
+</head>
+<body>
+  <div class="auth-container">
+    <header>
+      <h1 class="site-name">Secure Movie Blog</h1>
+      <link rel="stylesheet" href="/styles/css/auth.css">
+    </header>
+
+    <!-- Include the navigation bar -->
+    <!-- The server or build system will replace this with the content of navbar.html -->
+    <!-- #include file="navbar.html" -->
+
+    <main>
+      <div class="login-signup">
+        <div class="login">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+              <label for="loginUsername">Username:</label>
+              <input type="text" id="loginUsername" name="username" required><br>
+              
+              <label for="loginPassword">Password:</label>
+              <input type="password" id="loginPassword" name="password" required><br>
+  
+              <button type="submit">Login</button>
+            </form>
+          </div>
+
+        <div class="divider"></div>
+
+        <div class="signup">
+          <h2>Sign Up</h2>
+          <form id="signupForm" method="POST" action="/signup">
+            <!-- CSRF Token: Add a CSRF token here (use your server-side implementation) -->
+            <!-- <input type="hidden" name="_csrf" value="your-csrf-token"> -->
+
+            <label for="signupFullName">Full Name:</label>
+            <input type="text" id="signupFullName" name="fullName" required><br>
+
+            <label for="signupUsername">Preferred Username:</label>
+            <input type="text" id="signupUsername" name="username" required><br>
+
+            <label for="signupEmail">Email:</label>
+            <input type="email" id="signupEmail" name="email" required><br>
+
+            <label for="signupPassword">Password:</label>
+            <input type="password" id="signupPassword" name="password" required><br>
+
+            <label for="signupConfirmPassword">Confirm Password:</label>
+            <input type="password" id="signupConfirmPassword" name="confirmPassword" required><br>
+
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    
+    <footer>
+      <p>&copy; 2023 Secure Movie Blog. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

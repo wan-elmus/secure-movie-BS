@@ -13,10 +13,18 @@ body {
   line-height: 1.6;
 }
 
+.profile {
+  margin: 0;
+  border-radius: 50%;
+  margin-inline: 3rem;
+}
+
+
 /* Navbar styles */
 nav {
   background-color: #333;
   padding: 10px;
+  list-style: none;
 }
 
 nav ul {
