@@ -1,48 +1,62 @@
-
-
-// postController
+const { Op } = require('sequelize');
 const connection = require('../config/database');
+const { validationResult } = require('express-validator');
 
-// Post Management
-exports.createPost = (req, res) => {
+// Sequelize Models for users and posts
+// const { User, Post } = require('../models');
+
+const OTPverification = require('../models/OTPverification');
+const Users = require('../models/Users');
+const Post = require('../models/post');
+
+
+// Post Management - Create a Post
+exports.createPost = async (req, res) => {
   const user = req.session.user;
   if (!user) {
     return res.send('Please log in first.');
   }
 
   const { title, content } = req.body;
-  const post = { title, content, author_id: user.id };
+  const post = { title, content, authorId: user.id };
 
-  connection.query('INSERT INTO posts SET ?', post, (err, result) => {
-    if (err) throw err;
+  try {
+    const createdPost = await Post.create(post);
     res.render('create-post', { message: 'Post created successfully!' });
-  });
+  } catch (error) {
+    console.error('Error creating post:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
 
-exports.editPost = (req, res) => {
+// Post Management - Edit a Post
+exports.editPost = async (req, res) => {
   const user = req.session.user;
   if (!user) {
     return res.send('Please log in first.');
   }
 
   const postId = req.params.postId;
-  connection.query('SELECT * FROM posts WHERE id = ?', postId, (err, rows) => {
-    if (err) throw err;
-    if (rows.length === 0) {
+  try {
+    const post = await Post.findOne({ where: { id: postId } });
+
+    if (!post) {
       return res.send('Post not found.');
     }
 
-    const post = rows[0];
-
-    if (post.author_id !== user.id) {
+    if (post.authorId !== user.id) {
       return res.send('You are not authorized to edit this post.');
     }
 
     res.render('edit-post', { post });
-  });
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
 
-exports.updatePost = (req, res) => {
+// Post Management - Update a Post
+exports.updatePost = async (req, res) => {
   const user = req.session.user;
   if (!user) {
     return res.send('Please log in first.');
@@ -51,43 +65,72 @@ exports.updatePost = (req, res) => {
   const postId = req.params.postId;
   const { title, content } = req.body;
 
-  connection.query('UPDATE posts SET title = ?, content = ? WHERE id = ?', [title, content, postId], (err, result) => {
-    if (err) throw err;
-    res.render('edit-post', { post: { id: postId, title, content }, message: 'Post updated successfully!' });
-  });
+  try {
+    const post = await Post.findOne({ where: { id: postId } });
+
+    if (!post) {
+      return res.send('Post not found.');
+    }
+
+    if (post.authorId !== user.id) {
+      return res.send('You are not authorized to edit this post.');
+    }
+
+    post.title = title;
+    post.content = content;
+    await post.save();
+
+    res.render('edit-post', { post, message: 'Post updated successfully!' });
+  } catch (error) {
+    console.error('Error updating post:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
 
-exports.deletePost = (req, res) => {
+// Post Management - Delete a Post
+exports.deletePost = async (req, res) => {
   const user = req.session.user;
   if (!user) {
     return res.send('Please log in first.');
   }
 
   const postId = req.params.postId;
-  connection.query('SELECT * FROM posts WHERE id = ?', postId, (err, rows) => {
-    if (err) throw err;
-    if (rows.length === 0) {
+  try {
+    const post = await Post.findOne({ where: { id: postId } });
+
+    if (!post) {
       return res.send('Post not found.');
     }
 
-    const post = rows[0];
-
-    if (post.author_id !== user.id) {
+    if (post.authorId !== user.id) {
       return res.send('You are not authorized to delete this post.');
     }
 
-    connection.query('DELETE FROM posts WHERE id = ?', postId, (err, result) => {
-      if (err) throw err;
-      res.render('index', { message: 'Post deleted successfully!' });
-    });
-  });
+    await post.destroy();
+
+    res.render('index', { message: 'Post deleted successfully!' });
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
 
-exports.searchPosts = (req, res) => {
+// Search Posts
+exports.searchPosts = async (req, res) => {
   const searchTerm = req.query.term;
 
-  connection.query('SELECT * FROM posts WHERE title LIKE ?', `%${searchTerm}%`, (err, rows) => {
-    if (err) throw err;
-    res.render('search-results', { posts: rows });
-  });
+  try {
+    const posts = await Post.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchTerm}%`,
+        },
+      },
+    });
+
+    res.render('search-results', { posts });
+  } catch (error) {
+    console.error('Error searching posts:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };

@@ -4,12 +4,14 @@
 <html lang="en">
 <head>
   <!-- Meta tags and other head elements -->
+  <link rel="stylesheet" href="/styles/css/auth.css">
+  <!-- CSRF Token: Add a CSRF token here (use your server-side implementation) -->
+  <!-- <input type="hidden" name="_csrf" value="your-csrf-token"> -->
 </head>
 <body>
   <div class="auth-container">
     <header>
       <h1 class="site-name">Secure Movie Blog</h1>
-      <link rel="stylesheet" href="/styles/css/auth.css">
     </header>
 
     <!-- Include the navigation bar -->
@@ -27,6 +29,9 @@
               <label for="loginPassword">Password:</label>
               <input type="password" id="loginPassword" name="password" required><br>
   
+              <!-- CSRF Token: Add a CSRF token here (use your server-side implementation) -->
+              <!-- <input type="hidden" name="_csrf" value="your-csrf-token"> -->
+              
               <button type="submit">Login</button>
             </form>
           </div>
@@ -35,7 +40,7 @@
 
         <div class="signup">
           <h2>Sign Up</h2>
-          <form id="signupForm" method="POST" action="/signup">
+          <form id="signupForm" method="POST" action="/register">
             <!-- CSRF Token: Add a CSRF token here (use your server-side implementation) -->
             <!-- <input type="hidden" name="_csrf" value="your-csrf-token"> -->
 
@@ -53,6 +58,9 @@
 
             <label for="signupConfirmPassword">Confirm Password:</label>
             <input type="password" id="signupConfirmPassword" name="confirmPassword" required><br>
+
+            <!-- CSRF Token: Add a CSRF token here (use your server-side implementation) -->
+            <!-- <input type="hidden" name="_csrf" value="your-csrf-token"> -->
 
             <button type="submit">Sign Up</button>
           </form>

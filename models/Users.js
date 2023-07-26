@@ -2,7 +2,7 @@
 const connection = require('../config/database');
 const bcrypt = require('bcrypt');
 
-class User {
+class Users {
   constructor(data) {
     if (data) {
       this.id = data.id;
@@ -33,7 +33,7 @@ class User {
         if (err) reject(err);
         else {
           if (rows.length === 0) resolve(null);
-          else resolve(new User(rows[0]));
+          else resolve(new Users(rows[0]));
         }
       });
     });
@@ -46,11 +46,11 @@ class User {
         if (err) reject(err);
         else {
           if (rows.length === 0) resolve(null);
-          else resolve(new User(rows[0]));
+          else resolve(new Users(rows[0]));
         }
       });
     });
   }
 }
 
-module.exports = User;
+module.exports = Users;

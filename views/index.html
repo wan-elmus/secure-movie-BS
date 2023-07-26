@@ -40,40 +40,48 @@
   </header>
 
   <main class="dashboard-content">
-    <h2>Dashboard</h2>
-    <p>Create a New Post</p>
-    <form action="/create-post" method="post">
-      <label for="postTitle">Title:</label>
-      <input type="text" id="postTitle" name="title" required><br>
-      
-      <label for="postContent">Content:</label>
-      <textarea id="postContent" name="content" required></textarea><br>
-
-      <button type="submit">Create Post</button>
-    </form>
-
-    <h2>Search Results</h2>
-    <div class="search-results">
-      <div class="search-result">
-        <h3>Movie Title 1</h3>
-        <p>Movie content 1</p>
+    <!-- Check if the user is authenticated (logged in) -->
+    <% if (user && user.isAuthenticated) { %>
+      <h2>Welcome, <%= user.username %>!</h2>
+      <h3>Dashboard</h3>
+      <p>Create a New Post</p>
+      <form action="/create-post" method="post">
+        <label for="postTitle">Title:</label>
+        <input type="text" id="postTitle" name="title" required><br>
+        
+        <label for="postContent">Content:</label>
+        <textarea id="postContent" name="content" required></textarea><br>
+  
+        <button type="submit">Create Post</button>
+      </form>
+  
+      <h3>Edit Profile</h3>
+      <form action="/edit-profile" method="post">
+        <label for="editUsername">Username:</label>
+        <input type="text" id="editUsername" name="username" value="<%= user.username %>" required><br>
+        
+        <label for="editPassword">Password:</label>
+        <input type="password" id="editPassword" name="password" required><br>
+  
+        <label for="editEmail">Email:</label>
+        <input type="email" id="editEmail" name="email" value="<%= user.email %>" required><br>
+  
+        <button type="submit">Update Profile</button>
+      </form>
+    <% } else { %>
+      <!-- Display the search functionality when the user is not logged in -->
+      <h2>Search Results</h2>
+      <div class="search-results">
+        <div class="search-result">
+          <h3>Movie Title 1</h3>
+          <p>Movie content 1</p>
+        </div>
+        <div class="search-result">
+          <h3>Movie Title 2</h3>
+          <p>Movie content 2</p>
+        </div>
       </div>
-      <div class="search-result">
-        <h3>Movie Title 2</h3>
-        <p>Movie content 2</p>
-      </div>
-    </div>
-
-    <h2>Edit Post</h2>
-    <form action="/update-post" method="post">
-      <label for="editPostTitle">Title:</label>
-      <input type="text" id="editPostTitle" name="title" required><br>
-      
-      <label for="editPostContent">Content:</label>
-      <textarea id="editPostContent" name="content" required></textarea><br>
-
-      <button type="submit">Update Post</button>
-    </form>
+    <% } %>
   </main>
 
   <footer>

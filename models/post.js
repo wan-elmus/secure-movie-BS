@@ -1,7 +1,7 @@
 
 const connection = require('../config/database');
 
-class Post {
+class post {
   constructor(data) {
     if (data) {
       this.id = data.id;
@@ -29,11 +29,11 @@ class Post {
         if (err) reject(err);
         else {
           if (rows.length === 0) resolve(null);
-          else resolve(new Post(rows[0]));
+          else resolve(new post(rows[0]));
         }
       });
     });
   }
 }
 
-module.exports = Post;
+module.exports = post;

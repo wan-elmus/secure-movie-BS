@@ -1,5 +1,15 @@
 
 const connection = require('../config/database');
+// authMiddleware.js
+
+const csurf = require('csurf');
+
+const csrfProtection = csurf({ cookie: true });
+
+module.exports = {
+  csrfProtection,
+};
+
 
 exports.requireAuth = (req, res, next) => {
   // Middleware to check if the user is authenticated

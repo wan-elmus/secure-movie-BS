@@ -1,7 +1,7 @@
 
 const connection = require('../config/database');
 
-class OTPVerification {
+class OTPverification {
   constructor(data) {
     if (data) {
       this.id = data.id;
@@ -29,11 +29,11 @@ class OTPVerification {
         if (err) reject(err);
         else {
           if (rows.length === 0) resolve(null);
-          else resolve(new OTPVerification(rows[0]));
+          else resolve(new OTPverification(rows[0]));
         }
       });
     });
   }
 }
 
-module.exports = OTPVerification;
+module.exports = OTPverification;
