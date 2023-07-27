@@ -1,17 +1,12 @@
 
-const connection = require('../config/database');
 // authMiddleware.js
 
 const csurf = require('csurf');
+const connection = require('../config/database');
 
 const csrfProtection = csurf({ cookie: true });
 
-module.exports = {
-  csrfProtection,
-};
-
-
-exports.requireAuth = (req, res, next) => {
+const requireAuth = (req, res, next) => {
   // Middleware to check if the user is authenticated
   if (!req.session.isAuthenticated) {
     return res.redirect('/login'); // Redirect to login page if not authenticated
@@ -30,7 +25,7 @@ exports.requireAuth = (req, res, next) => {
   next(); // Continue to the next middleware or route handler
 };
 
-exports.verify2FA = (req, res, next) => {
+const verify2FA = (req, res, next) => {
   // Middleware to verify 2FA OTP entered by the user
   const user = req.session.user;
   if (!user) {
@@ -41,15 +36,25 @@ exports.verify2FA = (req, res, next) => {
 
   // Check if the OTP is valid and within the valid time window for 2FA verification
   const currentTime = new Date();
-  connection.query('SELECT * FROM otp_verification WHERE user_id = ? AND otp = ? AND type = ? AND expiration_time > ?', [user.id, otp, '2fa_enrollment', currentTime], (err, rows) => {
-    if (err) throw err;
+  connection.query(
+    'SELECT * FROM otp_verification WHERE user_id = ? AND otp = ? AND type = ? AND expiration_time > ?',
+    [user.id, otp, '2fa_enrollment', currentTime],
+    (err, rows) => {
+      if (err) throw err;
 
-    if (rows.length === 0) {
-      return res.render('verify-2fa', { error: 'Invalid OTP or expired. Please try again.' }); // Render 2FA verification page with error message
+      if (rows.length === 0) {
+        return res.render('verify-2fa', { error: 'Invalid OTP or expired. Please try again.' }); // Render 2FA verification page with error message
+      }
+
+      // OTP is valid, mark the user as 2FA verified in the session
+      req.session.user.is2FAVerified = true;
+      next(); // Continue to the next middleware or route handler
     }
+  );
+};
 
-    // OTP is valid, mark the user as 2FA verified in the session
-    req.session.user.is2FAVerified = true;
-    next(); // Continue to the next middleware or route handler
-  });
+module.exports = {
+  csrfProtection,
+  requireAuth,
+  verify2FA,
 };

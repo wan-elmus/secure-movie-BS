@@ -4,7 +4,8 @@
   "description": "To develop a secure movie blog system",
   "main": "app.js",
   "scripts": {
-    "test": "npm install mocha chai --save-dev"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "sensei",
   "license": "ISC",
@@ -15,6 +16,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "csurf": "^1.11.0",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-mysql-session": "^3.0.0",
     "express-session": "^1.17.3",

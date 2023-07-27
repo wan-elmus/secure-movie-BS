@@ -41,53 +41,13 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-// Route to serve the frontend auth.html
-app.get('/auth', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'auth.html'));
-});
-
-// Add routes for other frontend pages as needed
-
-app.post('/register', authController.register);
-app.post('/enable-2fa', authController.enable2FA);
-app.post('/verify-otp-registration', authController.verifyOTPRegistration);
-app.post('/verify-otp-2fa-enrollment', authController.verifyOTP2FAEnrollment);
-app.post('/login', authController.login);
-app.get('/logout', authController.logout);
-
-app.get('/create-edit-del-post', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'create-edit-del-post.html'));
-});
-
-app.get('/search-reviews', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'search-reviews.html'));
-});
-
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'about.html'));
-});
-
-app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'contact.html'));
-});
-
-// Routes for post management - Protect with authMiddleware
-app.post('/create-post', authController.authMiddleware, postController.createPost);
-app.get('/edit-post/:postId', authController.authMiddleware, postController.editPost);
-app.post('/update-post/:postId', authController.authMiddleware, postController.updatePost);
-app.get('/delete-post/:postId', authController.authMiddleware, postController.deletePost);
-
-app.get('/search', postController.searchPosts);
-
-// Send email verification token route
-app.get('/send-verification-token', (req, res) => {
-  // ... (remaining code for sending verification token)
-});
+// ... Rest of the code remains the same ...
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(500).send('Internal Server Error');
+  next(err); // Pass the error to the next error handling middleware
 });
 
 // 404 Not Found middleware

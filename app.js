@@ -1,11 +1,11 @@
 
+
 const express = require('express');
 const app = express();
 const session = require('express-session');
 const helmet = require('helmet');
 const path = require('path');
 const crypto = require('crypto');
-const authMiddleware = require('./middleware/authMiddleware');
 const sessionMiddleware = require('./middleware/sessionMiddleware');
 const { csrfProtection } = require('./middleware/authMiddleware');
 const authController = require('./controllers/authController');
@@ -35,7 +35,7 @@ app.use(helmet());
 app.use(sessionMiddleware);
 
 // Use the CSRF protection middleware for all POST requests
-app.post('*', csrfProtection);
+// app.post('*', csrfProtection);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -46,6 +46,9 @@ app.use(express.static('public'));
 // app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 // });
+
+// app.set('view engine', 'ejs');
+
 
 // Route to serve the frontend auth.html
 app.get('/auth', (req, res) => {
@@ -84,11 +87,13 @@ app.get('/contact', (req, res) => {
 });
 
 
-// Routes for post management - Protect with authMiddleware
-app.post('/create-post', authController.authMiddleware, postController.createPost);
-app.get('/edit-post/:postId', authController.authMiddleware, postController.editPost);
-app.post('/update-post/:postId', authController.authMiddleware, postController.updatePost);
-app.get('/delete-post/:postId', authController.authMiddleware, postController.deletePost);
+// Use the CSRF protection middleware for specific POST routes
+// app.post('/create-post', csrfProtection, authController.authMiddleware, postController.createPost);
+// app.post('/update-post/:postId', csrfProtection, authController.authMiddleware, postController.updatePost);
+// app.post('/delete-post/:postId', csrfProtection, authController.authMiddleware, postController.deletePost);
+
+// app.get('/edit-post/:postId', csrfProtection, authController.authMiddleware, postController.editPost);
+
 
 app.get('/search', postController.searchPosts);
 
@@ -149,7 +154,7 @@ app.use((req, res) => {
 });
 
 // Start the server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });

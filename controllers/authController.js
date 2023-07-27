@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 const { generateOTP, sendOTPEmail } = require('../utils/otpUtils');
 const { Op } = require('sequelize');
+// const authMiddleware = require('../middleware/authMiddleware');
+// const { csrfProtection, requireAuth, verify2FA } = require('../middleware/authMiddleware');
+const { csrfProtection, requireAuth, verify2FA } = require('../middleware/authMiddleware');
+
 
 
 // Sequelize Models for users
