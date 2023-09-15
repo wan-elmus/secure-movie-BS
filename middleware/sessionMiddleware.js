@@ -5,7 +5,7 @@ const connection = require('../config/database');
 
 // Set up session options
 const sessionOptions = {
-  secret: 'your-secret-key', // Replace with a secure random string
+  secret: 'site-secret-key', // a secure random string - should be replaced
   resave: false,
   saveUninitialized: false,
   store: new MySQLStore({

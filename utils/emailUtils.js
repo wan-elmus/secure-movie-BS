@@ -3,12 +3,12 @@ const nodemailer = require('nodemailer');
 
 // Utility function to send an email
 exports.sendEmail = (emailOptions) => {
-  // Create a transporter using nodemailer with your email service provider settings
+  // transporter using nodemailer with email service provider settings
   const transporter = nodemailer.createTransport({
-    service: 'your-email-service-provider', // Replace with your email service provider (e.g., Gmail, Outlook, etc.)
+    service: 'email-service-provider', // we should use Gmail, Outlook e.t.c
     auth: {
-      user: 'your-email', // Replace with your email address
-      pass: 'your-email-password', // Replace with your email password or an app-specific password
+      user: 'site-email', // to be replaced with actual email address
+      pass: 'site-email-password', // to be replaced
     },
   });
 

@@ -34,7 +34,6 @@ app.use(helmet());
 // Use the session middleware
 app.use(sessionMiddleware);
 
-// Use the CSRF protection middleware for all POST requests
 // app.post('*', csrfProtection);
 
 app.use(express.urlencoded({ extended: true }));

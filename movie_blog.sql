@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS posts (
   author_id CHAR(36) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE,
-  INDEX (author_id) -- Add an index on author_id for better query performance
+  INDEX (author_id)
 );
 
 -- Table to store OTP for users
@@ -32,5 +32,5 @@ CREATE TABLE IF NOT EXISTS otp_verification (
     type ENUM('registration', '2fa_enrollment') NOT NULL,
     expiration_time TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX (user_id) -- Add an index on user_id for better query performance
+    INDEX (user_id)
 );

@@ -9,18 +9,18 @@ exports.generateOTP = () => {
 };
 
 exports.sendOTPEmail = (connection, email, otp) => {
-  // Create a transporter using nodemailer with your email service provider settings
+  // transporter using nodemailer with email service provider settings
   const transporter = nodemailer.createTransport({
-    service: 'your-email-service-provider',
+    service: 'site-email-service-provider',
     auth: {
-      user: 'your-email',
-      pass: 'your-email-password',
+      user: 'site-email',
+      pass: 'site-email-password',
     },
   });
 
   // Email content
   const mailOptions = {
-    from: 'your-email',
+    from: 'site-email',
     to: email,
     subject: 'OTP Verification',
     text: `Your OTP for verification is: ${otp}`,

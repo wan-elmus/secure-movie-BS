@@ -11,7 +11,6 @@ router.post(
     body('username').trim().notEmpty().isLength({ min: 3 }),
     body('email').trim().isEmail(),
     body('password').isLength({ min: 6 }),
-    // Add more validations as needed
   ],
   authController.register
 );
@@ -20,7 +19,7 @@ router.post(
 router.post(
   '/enable-2fa',
   [
-    // Add any validation for 2FA enrollment if required
+    // Add validation - to be modified  
   ],
   authController.enable2FA
 );
@@ -50,7 +49,7 @@ router.post(
   [
     body('username').trim().notEmpty(),
     body('password').notEmpty(),
-    // Add more validations as needed
+    
   ],
   authController.login
 );

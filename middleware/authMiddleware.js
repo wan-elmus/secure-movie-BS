@@ -48,7 +48,7 @@ const verify2FA = (req, res, next) => {
 
       // OTP is valid, mark the user as 2FA verified in the session
       req.session.user.is2FAVerified = true;
-      next(); // Continue to the next middleware or route handler
+      next(); 
     }
   );
 };
